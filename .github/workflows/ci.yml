@@ -1,0 +1,52 @@
+name: Quality gate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck (test code is production code)
+        run: npm run typecheck
+
+      - name: Boot check (seed + serve + health)
+        run: |
+          npm run seed
+          PORT=3100 npm run dev &
+          server_pid=$!
+          for i in $(seq 1 30); do
+            curl -sf http://localhost:3100/health && break
+            sleep 1
+          done
+          curl -sf http://localhost:3100/health > /dev/null || { echo "boot check failed"; kill $server_pid; exit 1; }
+          kill $server_pid
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+        working-directory: tests/e2e
+
+      - name: E2E suite (fresh seed + boot owned by playwright config)
+        run: npm run test:e2e
+
+      - name: Upload failure artifacts (traces, screenshots, report)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-failures
+          path: |
+            tests/e2e/playwright-report/
+            tests/e2e/test-results/
+          retention-days: 14

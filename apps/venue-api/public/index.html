@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Venue Console</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <!-- Login view -->
+  <section id="login-view" data-testid="login-view">
+    <form id="login-form" data-testid="login-form">
+      <h1>Venue Console</h1>
+      <label for="login-email">Email</label>
+      <input id="login-email" data-testid="login-email" type="email"
+             autocomplete="username" placeholder="op-acme@acmevenues.test" required />
+      <button type="submit" data-testid="login-submit">Sign in</button>
+      <p class="status error" data-testid="login-error" hidden></p>
+    </form>
+  </section>
+
+  <!-- Console view -->
+  <main id="console-view" data-testid="console-view" hidden>
+    <header>
+      <span data-testid="nav-org" class="org"></span>
+      <span data-testid="nav-user" class="user"></span>
+      <button id="logout" data-testid="logout" type="button">Sign out</button>
+    </header>
+
+    <section id="create-section">
+      <form id="create-form" data-testid="create-form">
+        <h2>New event</h2>
+        <label for="create-event-name">Name</label>
+        <input id="create-event-name" data-testid="create-event-name" type="text" required />
+        <label for="create-event-date">Starts at</label>
+        <input id="create-event-date" data-testid="create-event-date" type="datetime-local" required />
+        <button type="submit" data-testid="create-event-submit">Create event</button>
+      </form>
+      <p id="create-disabled-note" data-testid="create-disabled-note" hidden>
+        Viewers are read-only — ask an operator to create events.
+      </p>
+      <p class="status error" data-testid="console-error" hidden></p>
+    </section>
+
+    <section>
+      <h2>Events</h2>
+      <table>
+        <thead>
+          <tr><th>Name</th><th>Status</th><th>Starts at</th><th>Tickets</th></tr>
+        </thead>
+        <tbody id="events-body" data-testid="events-body"></tbody>
+      </table>
+      <p data-testid="empty-events" hidden>No events yet.</p>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

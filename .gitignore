@@ -1,0 +1,7 @@
+node_modules/
+dist/
+*.db
+apps/*/data/
+playwright-report/
+test-results/
+.env
