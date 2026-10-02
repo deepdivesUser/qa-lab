@@ -38,6 +38,9 @@ jobs:
         run: npx playwright install --with-deps chromium
         working-directory: tests/e2e
 
+      - name: API contract suite
+        run: npm run test:api
+
       - name: E2E suite (fresh seed + boot owned by playwright config)
         run: npm run test:e2e
 
@@ -49,4 +52,5 @@ jobs:
           path: |
             tests/e2e/playwright-report/
             tests/e2e/test-results/
+            tests/api/test-results/
           retention-days: 14
