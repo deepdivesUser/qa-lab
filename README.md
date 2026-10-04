@@ -15,8 +15,8 @@ tests stay useful as a product grows — not just that I can write a selector.
 | `fixtures/` | Seeded test data shared across suites (grows in Phase 2 with factories) | ✅ starter |
 | `docs/` | Test strategy (automate vs. manual, risk-based) and flaky-test policy | ✅ starter |
 | `observability/` | Failure triage notes + structured logging conventions in the SUT | ✅ starter |
-| `tests/api/` | API contract smoke (health/login/events shapes, auth boundaries) — GraphQL + schema-drift next | ✅ starter, grows in Phase 2 |
-| `tests/data/` | SQL data validation: missing/duplicate rows, bad transforms, anomalies | 🔜 Phase 2 |
+| `tests/api/` | API contract smoke + checked-in JSON-Schema contracts (`contracts/`) guarded against drift; GraphQL on the Phase 5 shortlist | ✅ Phase 2 |
+| `tests/data/` | SQL data validation: FK integrity, duplicates, anomalies, constraint-drift detection + API↔DB reconciliation + dev/stage/prod promotion checks | ✅ Phase 2 |
 | `tests/isolation/` | Deep tenant-isolation & permission probes (IDOR-style) — smoke tests live in e2e now | 🔜 Phase 3 |
 | `tests/agent-harness/` | Repeatable harness for coding agents (Claude Code/Cursor): seeded env, assertions, graded results | 🔜 Phase 4 |
 

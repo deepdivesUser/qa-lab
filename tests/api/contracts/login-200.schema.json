@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "login-200",
+  "title": "POST /auth/login 200",
+  "type": "object",
+  "required": ["token", "user"],
+  "additionalProperties": false,
+  "properties": {
+    "token": { "type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$" },
+    "user": {
+      "type": "object",
+      "required": ["id", "email", "name", "role", "org"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "integer", "minimum": 1 },
+        "email": { "type": "string", "pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$" },
+        "name": { "type": "string", "minLength": 1 },
+        "role": { "enum": ["operator", "viewer"] },
+        "org": {
+          "type": "object",
+          "required": ["id", "name"],
+          "additionalProperties": false,
+          "properties": {
+            "id": { "type": "integer", "minimum": 1 },
+            "name": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    }
+  }
+}

@@ -23,6 +23,9 @@ export function openDb(): DatabaseSync {
   mkdirSync(path.dirname(DB_FILE), { recursive: true });
   const db = new DatabaseSync(DB_FILE);
   db.exec('PRAGMA foreign_keys = ON');
+  // Parallel connections (API requests, data-suite readers) share one file;
+  // without a busy timeout a writer/reader collision fails loudly instead of waiting.
+  db.exec('PRAGMA busy_timeout = 2000');
   return db;
 }
 

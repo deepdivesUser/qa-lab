@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "health",
+  "title": "GET /health",
+  "description": "Liveness probe. Shape is load-balancer facing: one boolean.",
+  "type": "object",
+  "required": ["ok"],
+  "additionalProperties": false,
+  "properties": {
+    "ok": { "type": "boolean", "enum": [true] }
+  }
+}

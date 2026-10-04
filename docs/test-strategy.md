@@ -33,7 +33,8 @@ it prevents gets deleted (see `flaky-policy.md`).
 
 ## Environments
 
-Phase 1 runs everything against one seeded SQLite database. Phase 2 introduces
-dev/stage/prod-like database files (`DATABASE_FILE`) so promotion checks can
-assert that migrations, seeds, and critical journeys stay aligned across
-environments.
+Phase 1 ran everything against one seeded SQLite database. Phase 2 makes the
+environment seam real: `DATABASE_FILE` points dev/stage/prod-like environments
+at separate database files, and `tests/data/specs/promotion.spec.ts` asserts
+that every environment's seed produces identical schema and content — the
+promotion check that migrations, seeds, and critical journeys stay aligned.

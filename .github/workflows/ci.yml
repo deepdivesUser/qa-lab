@@ -44,6 +44,9 @@ jobs:
       - name: API contract suite
         run: npm run test:api
 
+      - name: Data validation suite (integrity + reconciliation + promotion)
+        run: npm run test:data
+
       - name: E2E suite (fresh seed + boot owned by playwright config)
         run: npm run test:e2e
 

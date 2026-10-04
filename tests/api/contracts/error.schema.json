@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "error",
+  "title": "Error body (all non-2xx)",
+  "description": "Every error response shares one shape. Adding fields is a contract change; update this file and the docs in the same commit.",
+  "type": "object",
+  "required": ["error"],
+  "additionalProperties": false,
+  "properties": {
+    "error": { "type": "string", "minLength": 1 }
+  }
+}

@@ -1,17 +1,12 @@
-import { test, expect, type APIRequestContext } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { USERS } from '../../e2e/fixtures/users.ts';
+import { login, bearer } from '../../e2e/fixtures/api.ts';
 
 /**
  * Contract smoke for venue-api — status codes and response shapes, probed
- * straight at the boundary the UI can't be trusted to exercise. Phase 2
- * grows this into full contract + schema-drift coverage (GraphQL included).
+ * straight at the boundary the UI can't be trusted to exercise. Deeper shape
+ * guarantees live in schema-drift.spec.ts against ./contracts.
  */
-
-async function login(request: APIRequestContext, email: string): Promise<string> {
-  const res = await request.post('/auth/login', { data: { email } });
-  expect(res.ok(), `login should succeed for ${email}`).toBeTruthy();
-  return ((await res.json()).token) as string;
-}
 
 test('GET /health is a 200 with the documented shape', async ({ request }) => {
   const res = await request.get('/health');
@@ -53,7 +48,7 @@ test('GET /events without a token is a 401', async ({ request }) => {
 
 test('GET /events returns the documented list shape', async ({ request }) => {
   const token = await login(request, USERS.opAcme.email);
-  const res = await request.get('/events', { headers: { Authorization: `Bearer ${token}` } });
+  const res = await request.get('/events', { headers: bearer(token) });
   expect(res.status()).toBe(200);
 
   const { events } = await res.json();

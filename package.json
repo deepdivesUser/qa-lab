@@ -9,9 +9,10 @@
   "scripts": {
     "dev": "npm run dev -w @qa-lab/venue-api",
     "seed": "npm run seed -w @qa-lab/venue-api",
-    "typecheck": "npm run typecheck -w @qa-lab/venue-api && npm run typecheck -w @qa-lab/e2e && npm run typecheck -w @qa-lab/api",
+    "typecheck": "npm run typecheck -w @qa-lab/venue-api && npm run typecheck -w @qa-lab/e2e && npm run typecheck -w @qa-lab/api && npm run typecheck -w @qa-lab/data",
     "test:e2e": "npm run test -w @qa-lab/e2e",
-    "test:api": "npm run test -w @qa-lab/api"
+    "test:api": "npm run test -w @qa-lab/api",
+    "test:data": "npm run test -w @qa-lab/data"
   },
   "allowScripts": {
     "esbuild@0.28.2": true
