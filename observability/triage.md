@@ -35,3 +35,19 @@ coverage.
 - **Guard:** the two failing specs stay as-is; they are the regression coverage.
 - **Lesson:** visibility bugs that CSS causes, tests catch — assert on semantic state
   (`hidden`), not on what happens to be on top.
+
+## 2026-10-04 — isolation probes: 401 bodies differed between "no token" and "bad token"
+
+- **Symptom:** Phase 3 non-leak spec expected one uniform 401 body; `requireAuth`
+  returned `{error: 'missing bearer token'}` for an absent header but
+  `{error: 'invalid token'}` for anything else.
+- **Root cause:** helpful-for-debugging error text written before the auth
+  boundary had a uniformity contract. The distinction told a caller which
+  failure mode they hit — a minor auth-state oracle, and an inconsistent
+  contract for clients to parse.
+- **Fix:** one body for every 401 at the boundary: `{error: 'invalid token'}`
+  (`server.ts`, `requireAuth`).
+- **Guard:** `tests/isolation/specs/nonleak.spec.ts` — missing, garbage, and
+  unknown-but-valid-format tokens must all return the identical body.
+- **Lesson:** denial uniformity is a contract, not an accident — write it down
+  as a probe the day the boundary is built.

@@ -89,7 +89,9 @@ app.post('/auth/login', (req, res) => {
 function requireAuth(req: Request, res: Response, next: NextFunction): void {
   const header = req.headers.authorization ?? '';
   const token = header.startsWith('Bearer ') ? header.slice(7) : '';
-  if (!token) { res.status(401).json({ error: 'missing bearer token' }); return; }
+  // One body for every auth failure at the boundary — a caller must not be
+  // able to distinguish "no token" from "bad token" from "expired token".
+  if (!token) { res.status(401).json({ error: 'invalid token' }); return; }
 
   const db = openDb();
   try {

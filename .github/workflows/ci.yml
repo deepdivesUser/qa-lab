@@ -47,6 +47,9 @@ jobs:
       - name: Data validation suite (integrity + reconciliation + promotion)
         run: npm run test:data
 
+      - name: Isolation suite (access matrix + non-leak probes)
+        run: npm run test:isolation
+
       - name: E2E suite (fresh seed + boot owned by playwright config)
         run: npm run test:e2e
 

@@ -17,7 +17,7 @@ tests stay useful as a product grows — not just that I can write a selector.
 | `observability/` | Failure triage notes + structured logging conventions in the SUT | ✅ starter |
 | `tests/api/` | API contract smoke + checked-in JSON-Schema contracts (`contracts/`) guarded against drift; GraphQL on the Phase 5 shortlist | ✅ Phase 2 |
 | `tests/data/` | SQL data validation: FK integrity, duplicates, anomalies, constraint-drift detection + API↔DB reconciliation + dev/stage/prod promotion checks | ✅ Phase 2 |
-| `tests/isolation/` | Deep tenant-isolation & permission probes (IDOR-style) — smoke tests live in e2e now | 🔜 Phase 3 |
+| `tests/isolation/` | Deep tenant-isolation & permission probes (IDOR-style): full endpoint × role × org matrix, denial-uniformity and side-effect checks | ✅ Phase 3 |
 | `tests/agent-harness/` | Repeatable harness for coding agents (Claude Code/Cursor): seeded env, assertions, graded results | 🔜 Phase 4 |
 
 ## Run it
