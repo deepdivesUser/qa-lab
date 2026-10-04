@@ -9,11 +9,12 @@
   "scripts": {
     "dev": "npm run dev -w @qa-lab/venue-api",
     "seed": "npm run seed -w @qa-lab/venue-api",
-    "typecheck": "npm run typecheck -w @qa-lab/venue-api && npm run typecheck -w @qa-lab/e2e && npm run typecheck -w @qa-lab/api && npm run typecheck -w @qa-lab/data && npm run typecheck -w @qa-lab/isolation",
+    "typecheck": "npm run typecheck -w @qa-lab/venue-api && npm run typecheck -w @qa-lab/e2e && npm run typecheck -w @qa-lab/api && npm run typecheck -w @qa-lab/data && npm run typecheck -w @qa-lab/isolation && npm run typecheck -w @qa-lab/agent-harness",
     "test:e2e": "npm run test -w @qa-lab/e2e",
     "test:api": "npm run test -w @qa-lab/api",
     "test:data": "npm run test -w @qa-lab/data",
-    "test:isolation": "npm run test -w @qa-lab/isolation"
+    "test:isolation": "npm run test -w @qa-lab/isolation",
+    "harness:self-check": "npm run self-check -w @qa-lab/agent-harness"
   },
   "allowScripts": {
     "esbuild@0.28.2": true

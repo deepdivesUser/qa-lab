@@ -5,9 +5,8 @@ import { USERS, ACME_EVENTS } from '../fixtures/users.ts';
 
 /**
  * Tenant isolation smoke tests — the UI-level guarantee that one org never
- * sees another org's data. Phase 3 (tests/isolation/) deepens this with
- * exhaustive API-level probes: every read/write endpoint, both roles,
- * tampered payloads.
+ * sees another org's data. The exhaustive API-level matrix (every endpoint x
+ * role x org, denial uniformity, side effects) lives in tests/isolation/.
  */
 test.describe('tenant isolation (smoke)', () => {
   test("bayline operator's list contains no acme events", async ({ page }) => {

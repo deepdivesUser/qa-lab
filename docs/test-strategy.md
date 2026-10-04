@@ -24,8 +24,9 @@ it prevents gets deleted (see `flaky-policy.md`).
 ## Depth by risk
 
 - **Isolation & permissions:** deepest coverage — highest blast radius, and the
-  failure mode is a data leak, not a cosmetic bug. E2E smoke now; exhaustive
-  API probes in Phase 3.
+  failure mode is a data leak, not a cosmetic bug. E2E smoke in the UI;
+  exhaustive API probes in `tests/isolation/` (access matrix, denial
+  uniformity, write side effects).
 - **CRUD happy paths:** E2E-level only. The interesting failure modes live at
   boundaries (validation, auth), which are probed directly at the API.
 - **Static UI:** intentionally thin. The demo UI exists to exercise flows, not

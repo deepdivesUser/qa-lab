@@ -5,3 +5,4 @@ apps/*/data/
 playwright-report/
 test-results/
 .env
+tests/agent-harness/results/

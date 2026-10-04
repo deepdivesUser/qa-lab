@@ -50,6 +50,9 @@ jobs:
       - name: Isolation suite (access matrix + non-leak probes)
         run: npm run test:isolation
 
+      - name: Agent harness self-check
+        run: npm run harness:self-check
+
       - name: E2E suite (fresh seed + boot owned by playwright config)
         run: npm run test:e2e
 

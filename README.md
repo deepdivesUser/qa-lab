@@ -18,7 +18,7 @@ tests stay useful as a product grows — not just that I can write a selector.
 | `tests/api/` | API contract smoke + checked-in JSON-Schema contracts (`contracts/`) guarded against drift; GraphQL on the Phase 5 shortlist | ✅ Phase 2 |
 | `tests/data/` | SQL data validation: FK integrity, duplicates, anomalies, constraint-drift detection + API↔DB reconciliation + dev/stage/prod promotion checks | ✅ Phase 2 |
 | `tests/isolation/` | Deep tenant-isolation & permission probes (IDOR-style): full endpoint × role × org matrix, denial-uniformity and side-effect checks | ✅ Phase 3 |
-| `tests/agent-harness/` | Repeatable harness for coding agents (Claude Code/Cursor): seeded env, assertions, graded results | 🔜 Phase 4 |
+| `tests/agent-harness/` | Repeatable harness for coding agents (Claude Code/Cursor): seeded env, behavioral probes, graded results | ✅ Phase 4 |
 
 ## Run it
 
@@ -26,7 +26,11 @@ tests stay useful as a product grows — not just that I can write a selector.
 npm install
 npm run seed          # reset + seed the SQLite database (2 orgs, users, events, tickets)
 npm run dev           # boot the API + operator console on http://localhost:3100
-npm run test:e2e      # run the Playwright suite (auto-seeds a fresh DB, boots the app)
+npm run test:api       # contract smoke + schema-drift guards
+npm run test:data      # SQL integrity + API<->DB reconciliation + promotion checks
+npm run test:isolation # full access matrix + non-leak probes
+npm run test:e2e      # run the Playwright browser suite (auto-seeds a fresh DB, boots the app)
+npm run harness:self-check # verify the agent-harness machinery
 ```
 
 Requires Node ≥ 22.5 (`node:sqlite`). Playwright browsers: `npx playwright install chromium`.
