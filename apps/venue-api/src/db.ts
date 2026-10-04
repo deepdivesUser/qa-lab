@@ -1,5 +1,5 @@
 import { DatabaseSync } from 'node:sqlite';
-import { readFileSync } from 'node:fs';
+import { mkdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -19,6 +19,8 @@ export const DB_FILE =
  * stale. Opening SQLite is cheap at this scale; correctness beats cleverness.
  */
 export function openDb(): DatabaseSync {
+  // SQLite won't create missing parent dirs; a fresh clone has no data/ yet.
+  mkdirSync(path.dirname(DB_FILE), { recursive: true });
   const db = new DatabaseSync(DB_FILE);
   db.exec('PRAGMA foreign_keys = ON');
   return db;
