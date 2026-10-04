@@ -32,7 +32,10 @@ jobs:
             sleep 1
           done
           curl -sf http://localhost:3100/health > /dev/null || { echo "boot check failed"; kill $server_pid; exit 1; }
-          kill $server_pid
+          kill $server_pid 2>/dev/null || true
+          # npm doesn't forward signals to its children — reap the orphaned server
+          # so later suites can own port 3100.
+          pkill -f 'src/server.ts' 2>/dev/null || true
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
